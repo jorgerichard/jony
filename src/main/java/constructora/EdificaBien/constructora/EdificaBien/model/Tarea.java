@@ -16,10 +16,10 @@ public class Tarea {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column (length = 100, nullable = false)
+    @Column (length = 100, nullable = false, name = "Nombre")
     private String nombre;
 
-    @Column (length = 30, nullable = false)
+    @Column (length = 30, nullable = false, name = "Estado")
     private String estado;
 
     @ManyToOne

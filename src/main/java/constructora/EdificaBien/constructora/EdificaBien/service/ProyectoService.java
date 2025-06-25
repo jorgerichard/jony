@@ -14,16 +14,26 @@ public class ProyectoService {
     @Autowired
     private ProyectoRepository proyectoRepository;
 
-    public List<Proyecto> findAll(){
+    public List<Proyecto> findByAll(){
         return proyectoRepository.findAll();
+    }
+    public Proyecto findById(Integer id){
+        return proyectoRepository.findById(id).orElse(null);
     }
 
     public Proyecto findByNombre(String nombre){
         return proyectoRepository.findByNombre(nombre);
     }
 
-    public Proyecto findByDateRange(Date fecha){
-        return proyectoRepository.findByFechas(fecha);
+    public List<Proyecto> findProyectosByFechaInicio(Date startDate, Date endDate) {
+        return proyectoRepository.findByFechaInicioBetween(startDate, endDate);
     }
 
+    public void deleteProyecto(Integer id) {
+        proyectoRepository.deleteById(id);
+    }
+
+    public Proyecto guardarProyecto(Proyecto proyecto) {
+        return proyectoRepository.save(proyecto);
+    }
 }

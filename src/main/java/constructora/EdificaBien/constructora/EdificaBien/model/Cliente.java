@@ -16,13 +16,13 @@ public class Cliente {
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private Integer id;
 
-        @Column (length = 12, nullable = false)
+        @Column (length = 12, nullable = false, name = "Rut")
         private String rut;
 
-        @Column (length = 100, nullable = false)
+        @Column (length = 100, nullable = false, name = "Nombre Cliente")
         private String nombreCompleto;
 
-        @Column (length = 100, nullable = false, unique = true)
+        @Column (length = 100, nullable = false, unique = true,name = "Correo Electronico")
         private String correoElectronico;
 
         @ManyToOne

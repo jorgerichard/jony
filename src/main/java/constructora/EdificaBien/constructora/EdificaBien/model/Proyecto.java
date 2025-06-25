@@ -17,16 +17,16 @@ public class Proyecto {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column (length = 100, nullable = false, unique = true)
+    @Column (length = 100, nullable = false, unique = true, name = "Nombre Proyecto")
     private String nombre;
 
-    @Column (length = 225, nullable = false)
+    @Column (length = 225, nullable = false, name = "Descripcion")
     private String descripcion;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "Fecha de Inicio")
     private Date fechaInicio;
 
-    @Column(nullable = false)
+    @Column(nullable = false, name = "Fecha de termino")
     private Date fechaFin;
 
     @ManyToOne
