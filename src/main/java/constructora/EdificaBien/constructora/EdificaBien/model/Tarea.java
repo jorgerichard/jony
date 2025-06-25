@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table
+@Table(name = "tareas")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,8 +14,7 @@ public class Tarea {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
+    private Integer id;
 
     @Column (length = 100, nullable = false)
     private String nombre;
@@ -23,13 +22,9 @@ public class Tarea {
     @Column (length = 30, nullable = false)
     private String estado;
 
-    @Column (length = 100, nullable = false, unique = true)
-    private String correoElectronico;
-
     @ManyToOne
     @JoinColumn (name = "proyecto_id", nullable = false)
     private Proyecto proyecto;
-
 
     @ManyToOne
     @JoinColumn (name = "trabajador_id", nullable = false)

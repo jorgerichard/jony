@@ -7,20 +7,15 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 @Entity
-@Table
+@Table(name = "proyectos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class Proyecto {
 
-
-
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
-
-
+    private Integer id;
 
     @Column (length = 100, nullable = false, unique = true)
     private String nombre;
@@ -28,11 +23,11 @@ public class Proyecto {
     @Column (length = 225, nullable = false)
     private String descripcion;
 
+    @Column(nullable = false)
     private Date fechaInicio;
-    private Date fechaFin;
 
-    @Column (length = 100, nullable = false, unique = true)
-    private String correoElectronico;
+    @Column(nullable = false)
+    private Date fechaFin;
 
     @ManyToOne
     @JoinColumn (name = "cliente_id", nullable = false)

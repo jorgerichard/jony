@@ -6,16 +6,15 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table
+@Table(name = "clientes")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class Cliente {
 
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private int id;
+        private Integer id;
 
         @Column (length = 12, nullable = false)
         private String rut;
@@ -26,12 +25,7 @@ public class Cliente {
         @Column (length = 100, nullable = false, unique = true)
         private String correoElectronico;
 
-
         @ManyToOne
         @JoinColumn (name = "usuario_id", nullable = false)
          private Usuario usuario;
-
-
-
-
 }

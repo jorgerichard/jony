@@ -6,7 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table
+@Table(name = "trabajadores")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -14,7 +14,7 @@ public class Trabajador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Integer id;
 
     @Column(length = 12, nullable = false)
     private String rut;
