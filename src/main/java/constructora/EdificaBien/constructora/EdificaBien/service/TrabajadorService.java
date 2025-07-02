@@ -19,8 +19,8 @@ public class TrabajadorService {
         return trabajadorRepository.findAll();
     }
 
-    public Trabajador buscarTrabajadorPorRut(String rut) {
-        return trabajadorRepository.findByRut(rut);
+    public Trabajador buscarTrabajadorPorEspecialidad(String especialidad) {
+        return trabajadorRepository.findByEspecialidad(especialidad);
     }
 
     public Trabajador guardarTrabajador(Trabajador trabajador) {
@@ -32,4 +32,6 @@ public class TrabajadorService {
     }
 
     public Trabajador buscarTrabajadorPorId(Integer id){ return trabajadorRepository.findById(id).orElse(null);}
+
+    public Trabajador buscarPorRut(String rut){return trabajadorRepository.findByRut(rut);}
 }

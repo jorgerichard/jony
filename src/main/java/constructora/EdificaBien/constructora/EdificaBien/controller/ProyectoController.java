@@ -1,6 +1,7 @@
 package constructora.EdificaBien.constructora.EdificaBien.controller;
 
 import constructora.EdificaBien.constructora.EdificaBien.model.Proyecto;
+import constructora.EdificaBien.constructora.EdificaBien.model.Trabajador;
 import constructora.EdificaBien.constructora.EdificaBien.service.ProyectoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
@@ -14,7 +15,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/proyectos")
-@Tag(name = "Proyectos", description = "Servicios para consultar la información de los proyectos disponibles en la plataforma")
+@Tag(name = "Servicio de Proyectos", description = "Servicios para consultar la información de los proyectos disponibles en la plataforma")
 public class ProyectoController {
 
     @Autowired
@@ -26,14 +27,14 @@ public class ProyectoController {
         return ResponseEntity.status(200).body(proyectoService.findByAll());
     }
 
-    @GetMapping("/{nombre}")
+    @GetMapping("/nombre/{nombre}")
     @Operation(summary = "Listar proyectos por nombre", description = "Aquí puedes listar los proyectos por su nombre.")
-    public ResponseEntity<?> listarProyectosPorNombre(@PathVariable String nombre){
+    public ResponseEntity<?> listarProyectosPorNombre(@PathVariable String nombre) {
         Proyecto proyecto = proyectoService.findByNombre(nombre);
         if (proyecto == null) {
             return ResponseEntity.status(400).body("No se pudo encontrar el proyecto");
         }
-        return ResponseEntity.status(200).body(proyectoService.findByNombre(nombre));
+        return ResponseEntity.status(200).body(proyecto);
     }
 
     @GetMapping("/fechas")
@@ -45,20 +46,31 @@ public class ProyectoController {
         return ResponseEntity.status(200).body(proyectos);
     }
 
-    @GetMapping("/{id}")
+    @PutMapping("/{id}")
+    @Operation(summary = "Actualizar información de Proyectos", description = "Aquí puedes actualizar la información de las tareas a través de su id.")
+    public ResponseEntity<?> actualizarProyectos(@PathVariable Integer id, @RequestBody Proyecto proyecto){
+        Proyecto proyectoExistente = proyectoService.findById(id);
+        if (proyectoExistente == null) {
+            return ResponseEntity.status(404).body("Proyecto no encontrado");
+        }
+        Proyecto proyectoActualizado = proyectoService.guardarProyecto(proyecto);
+        return ResponseEntity.status(200).body("El proyecto se actualizó correctamente: \n"+proyectoActualizado);
+    }
+
+    @DeleteMapping("/{id}")
     @Operation(summary = "Borrar proyectos.", description = "Aquí puedes borrar proyectos con su id.")
-    public ResponseEntity<?> deleteProyectos(@PathVariable Integer id){
+    public ResponseEntity<?> deleteProyectos(@PathVariable Integer id) {
         Proyecto proyecto = proyectoService.findById(id);
-        if (proyecto==null){
+        if (proyecto == null) {
             return ResponseEntity.status(400).body("El proyecto no fue encontrado.");
         }
         proyectoService.deleteProyecto(id);
         return ResponseEntity.status(200).body("El proyecto fue correctamente eliminado");
     }
 
-    @GetMapping("/")
+    @PostMapping
     @Operation(summary = "Guardar proyectos.", description = "Aquí podrás agregar proyectos.")
-    public ResponseEntity<?> guardarProyectos(@RequestBody Proyecto proyecto){
+    public ResponseEntity<?> guardarProyectos(@RequestBody Proyecto proyecto) {
         proyectoService.guardarProyecto(proyecto);
         return ResponseEntity.status(200).body(proyecto);
     }

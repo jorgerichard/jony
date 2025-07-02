@@ -31,7 +31,7 @@ public class TareaService {
     }
 
     public List<Tarea> findByProyecto(Integer proyectoId) {
-        return tareaRepository.findByProyecto_Id(proyectoId);
+        return tareaRepository.findByProyectoId(proyectoId);
     }
 
     public Tarea guardarTarea(Tarea tarea) {

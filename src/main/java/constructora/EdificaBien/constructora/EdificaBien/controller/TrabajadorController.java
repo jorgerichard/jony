@@ -27,11 +27,21 @@ public class TrabajadorController {
     }
 
 
-    @GetMapping("/{rut}")
-    @Operation(summary = "Obtener un trabajador por su Rut", description = "Obtiene un trabajador por su ID")
-    public ResponseEntity<?> obtenerTrabajadorPorId(@PathVariable String rut) {
-        Trabajador trabajador = trabajadorService.buscarTrabajadorPorRut(rut);
+    @GetMapping("/{especialidad}")
+    @Operation(summary = "Obtener un trabajador por su especialidad", description = "Obtiene un trabajador por su especialidad")
+    public ResponseEntity<?> obtenerTrabajadorPorEspecialidad(@PathVariable String especialidad) {
+        Trabajador trabajador = trabajadorService.buscarTrabajadorPorEspecialidad(especialidad);
         if (trabajador == null) {
+            return ResponseEntity.status(404).body("Trabajador no encontrado");
+        }
+        return ResponseEntity.status(200).body(trabajador);
+    }
+
+    @GetMapping("/rut/{rut}")
+    @Operation(summary = "Obtener trabajadores por su rut", description = "Obten la información de los trabajadores utilizando su rut.")
+    public ResponseEntity<?> obtenerTrabajadorPorRut(@PathVariable String rut){
+        Trabajador trabajador = trabajadorService.buscarPorRut(rut);
+        if (trabajador==null){
             return ResponseEntity.status(404).body("Trabajador no encontrado");
         }
         return ResponseEntity.status(200).body(trabajador);
@@ -53,7 +63,6 @@ public class TrabajadorController {
         if (trabajadorExistente == null) {
             return ResponseEntity.status(404).body("Trabajador no encontrado");
         }
-        trabajador.setId(id);
         Trabajador trabajadorActualizado = trabajadorService.guardarTrabajador(trabajador);
         return ResponseEntity.status(200).body(trabajadorActualizado);
     }

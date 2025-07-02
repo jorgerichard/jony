@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface TrabajadorRepository extends JpaRepository<Trabajador, Integer> {
     Trabajador findByRut(String rut);
-    List<Trabajador> findByEspecialidad(String especialidad);
+    Trabajador findByEspecialidad(String especialidad);
 }

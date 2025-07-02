@@ -40,7 +40,7 @@ public class ClienteController {
             return ResponseEntity.status(404).body("Cliente no encontrado");
         }
         cliente.setId(id);
-        Cliente clienteActualizado = clienteService.guardarCliente(cliente);
+        Cliente clienteActualizado = clienteService.actualizarCliente(cliente);
         return ResponseEntity.status(200).body(clienteActualizado);
     }
 

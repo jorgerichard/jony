@@ -15,6 +15,6 @@ public class SwaggerConfig {
                 .info(new Info()
                         .title("Edifica Bien")
                         .version("1.0")
-                        .description("Docuentacion de la api"));
+                        .description("Documentacion de la api"));
     }
 }

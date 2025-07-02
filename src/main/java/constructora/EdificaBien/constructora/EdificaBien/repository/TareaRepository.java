@@ -9,8 +9,7 @@ import java.util.List;
 
 @Repository
 public interface TareaRepository extends JpaRepository<Tarea, Integer> {
-
+    List<Tarea> findByProyectoId(Integer proyectoId);
     List<Tarea> findByEstado(String estado);
-    List<Tarea> findByProyecto_Id(Integer proyectoId);
 
 }
